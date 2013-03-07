@@ -1,0 +1,22 @@
+{
+  "name": "apostrophe-blog",
+  "version": "0.0.1",
+  "description": "Blogging for the Apostrophe content management system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:punkave/apostrophe-blog.git"
+  },
+  "keywords": [
+    "blog",
+    "apostrophe",
+    "cms",
+    "blogging",
+    "punkave"
+  ],
+  "author": "P'unk Avenue LLC",
+  "license": "MIT"
+}
