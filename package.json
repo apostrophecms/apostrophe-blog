@@ -1,6 +1,6 @@
 {
   "name": "apostrophe-blog",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Blogging for the Apostrophe content management system",
   "main": "index.js",
   "scripts": {
@@ -18,5 +18,10 @@
     "punkave"
   ],
   "author": "P'unk Avenue LLC",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "async": "~0.2.6",
+    "underscore": "~1.4.4",
+    "extend": "~1.1.3"
+  }
 }

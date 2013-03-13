@@ -1,0 +1,23 @@
+<div class="apos-modal apos-template {% block class %}apos-new-post{% endblock %}">
+  <h3 data-hint-title>{% block action %}New Post{% endblock %}</h3>
+  <div class="apos-modal-body">
+    <form>
+      <fieldset>
+        <label>Title</label>
+        <input name="title" type="text" />
+      </fieldset>
+      <fieldset>
+        <label>Tags (comma-separated)</label>
+        <input name="tags" type="text" />
+      </fieldset>
+      <fieldset>
+        <label>Body</label>
+        <div data-body-edit-view></div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="apos-modal-footer">
+    <a href="#" data-action="save" class="apos-control apos-button apos-save">Save</a>
+    <a href="#" data-action="dismiss" class="apos-control apos-button apos-cancel">Cancel</a>
+  </div>
+</div>
