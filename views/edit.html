@@ -1,5 +1,5 @@
-<div class="apos-modal apos-template {% block class %}apos-new-post{% endblock %}">
-  <h3 data-hint-title>{% block action %}New Post{% endblock %}</h3>
+<div class="apos-modal apos-template apos-edit-blog-post">
+  <h3 data-hint-title>Edit Article</h3>
   <div class="apos-modal-body">
     <form>
       <fieldset>
@@ -10,6 +10,12 @@
         <label>Tags (comma-separated)</label>
         <input name="tags" type="text" />
       </fieldset>
+
+      <fieldset>
+        <label>Slug</label>
+        <input name="slug" type="text" />
+      </fieldset>
+
       <fieldset>
         <label>Body</label>
         <div data-body-edit-view></div>
@@ -19,5 +25,6 @@
   <div class="apos-modal-footer">
     <a href="#" data-action="save" class="apos-control apos-button apos-save">Save</a>
     <a href="#" data-action="dismiss" class="apos-control apos-button apos-cancel">Cancel</a>
+    <a href="#" data-action="delete" class="apos-control apos-button apos-delete">Delete</a>
   </div>
 </div>

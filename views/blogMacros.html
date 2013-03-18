@@ -1,0 +1,19 @@
+{% macro renderBlogPosts(items, pageUrl) %}
+  {% if items %}
+    {% for item in items %}
+      {{ renderBlogPost(item, pageUrl) }}
+    {% endfor %}
+  {% else %}
+    <h4>There are no blog posts yet.</h4>
+  {% endif %}
+{% endmacro %}
+
+{% macro renderBlogPost(item, pageUrl) %}
+  <div class="apos-blog-post">
+    <div class="apos-blog-post-heading">
+      <h4><a href="{{ pageUrl }}/{{ item.publishedAt | date('YYYY/MM/DD') }}/{{ item.slug }}">{{ item.title | e }}</a></h4>
+      <h6>{{ item.publishedAt | date("MMM DD [']YY") }}</h6>
+    </div>
+    <div class="apos-blog-post-body">{{ aposArea({ area: item.areas.body }) }}</div>
+  </div>
+{% endmacro %}

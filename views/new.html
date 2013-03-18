@@ -1,5 +1,5 @@
-<div class="apos-modal apos-template apos-edit-post">
-  <h3 data-hint-title>Edit Post</h3>
+<div class="apos-modal apos-template {% block class %}apos-new-blog-post{% endblock %}">
+  <h3 data-hint-title>{% block action %}New Article{% endblock %}</h3>
   <div class="apos-modal-body">
     <form>
       <fieldset>
@@ -11,11 +11,8 @@
         <input name="tags" type="text" />
       </fieldset>
       <fieldset>
-        <label>Slug</label>
-        <input name="slug" type="text" />
-      </fieldset>
-      <fieldset>
         <label>Body</label>
+        {# js adds this area to the dialog #}
         <div data-body-edit-view></div>
       </fieldset>
     </form>
@@ -23,6 +20,5 @@
   <div class="apos-modal-footer">
     <a href="#" data-action="save" class="apos-control apos-button apos-save">Save</a>
     <a href="#" data-action="dismiss" class="apos-control apos-button apos-cancel">Cancel</a>
-    <a href="#" data-action="delete" class="apos-control apos-button apos-delete">Delete</a>
   </div>
 </div>
