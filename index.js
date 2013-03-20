@@ -4,10 +4,27 @@ var extend = require('extend');
 var snippets = require('apostrophe-snippets');
 var util = require('util');
 
-// Intended for use as a constructor
-// var blog = new require('apostrophe-blog')(options, callback);
+// Creating an instance of the blog module is easy:
+// var blog = require('apostrophe-blog')(options, callback);
+//
+// If you want to access the constructor function for use in the
+// constructor of a module that extends this one, consider:
+//
+// var blog = require('apostrophe-blog');
+// ... Inside the constructor for the new object ...
+// blog.Blog.call(this, options, null);
+//
+// In fact, this module does exactly that to extend the snippets module
+// (see below). Something similar happens on the browser side in
+// main.js.
 
-module.exports = function(options, callback) {
+module.exports = blog;
+
+function blog(options, callback) {
+  return new blog.Blog(options, callback);
+}
+
+blog.Blog = function(options, callback) {
   var self = this;
   _.defaults(options, {
     instance: 'blogPost',
@@ -23,12 +40,9 @@ module.exports = function(options, callback) {
     menuName: 'aposBlogMenu'
   });
 
-  console.log('constructing blog with dirs option set to:');
-  console.log(options.dirs);
-
   // Call the base class constructor. Don't pass the callback, we want to invoke it
   // ourselves after constructing more stuff
-  snippets.call(this, options, null);
+  snippets.Snippets.call(this, options, null);
 
   // The snippet dispatcher is almost perfect for our needs, except that
   // we expect the publication date of the blog post to appear before the slug
