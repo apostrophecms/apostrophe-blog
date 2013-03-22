@@ -30,8 +30,6 @@ blog.Blog = function(options, callback) {
     instance: 'blogPost',
     name: options.name || 'blog',
     label: options.name || 'Blog',
-    // Find our templates before the snippet templates (a chain of overrides)
-    dirs: (options.dirs || []).concat([ __dirname ]),
     // Overridden separately so that one can have types that just
     // override the templates and don't mess with replacing
     // all of the javascript and CSS
@@ -39,6 +37,9 @@ blog.Blog = function(options, callback) {
     // The default would be aposBlogPostMenu, this is more natural
     menuName: 'aposBlogMenu'
   });
+
+  // Find our templates before the snippet templates (a chain of overrides)
+  options.dirs = (options.dirs || []).concat([ __dirname ]);
 
   // Call the base class constructor. Don't pass the callback, we want to invoke it
   // ourselves after constructing more stuff

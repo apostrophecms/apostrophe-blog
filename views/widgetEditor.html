@@ -1,0 +1,30 @@
+{% extends "baseWidgetEditor.html" %}
+
+{% block widgetVars %}
+  {% set widgetClass = 'apos-blog-widget-editor' %}
+{% endblock %}
+
+{% block title %}
+  Display Articles
+{% endblock %}
+
+{% block instructions %}
+Start typing the title of an article, then click on the suggestions that appear to insert them.
+Or just use tags to pull in articles.
+{% endblock %}
+
+{% block formBody %}
+  <label>By Tag</label><input type="radio" name="by" value="tag" />
+  <fieldset>
+    <label>Tags</label><input type="text" name="tags" />
+    <label>Articles Shown</label><input type="text" name="limit" />
+  </fieldset>
+  <label>By Title</label><input type="radio" name="by" value="id" />
+  <fieldset>
+    <label>Titles</label><input type="text" name="title" />
+    <ul data-ids>
+      <li data-id class="apos-template"><span data-title>Title</span> <a class="apos-remove">x</a></li>
+    </ul>
+  </fieldset>
+{% endblock %}
+

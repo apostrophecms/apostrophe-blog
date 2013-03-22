@@ -10,3 +10,13 @@ function AposBlog(optionsArg) {
   // just about right for now. Later we'll want to catch events to
   // add handlers for editing the publication date and status, etc.
 }
+
+AposBlog.addWidgetType = function(options) {
+  _.defaults(options, {
+    name: 'blog',
+    label: 'Blog Posts',
+    action: '/apos-blog-post',
+    defaultLimit: 5
+  });
+  AposSnippets.addWidgetType(options);
+};
