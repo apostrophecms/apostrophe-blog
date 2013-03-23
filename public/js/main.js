@@ -12,6 +12,9 @@ function AposBlog(optionsArg) {
 }
 
 AposBlog.addWidgetType = function(options) {
+  if (!options) {
+    options = {};
+  }
   _.defaults(options, {
     name: 'blog',
     label: 'Blog Posts',
