@@ -3,6 +3,7 @@ var _ = require('underscore');
 var extend = require('extend');
 var snippets = require('apostrophe-snippets');
 var util = require('util');
+var moment = require('moment');
 
 // Creating an instance of the blog module is easy:
 // var blog = require('apostrophe-blog')(options, callback);
@@ -56,9 +57,13 @@ blog.Blog = function(options, callback) {
 
   self.dispatch = function(req, callback) {
     if (req.remainder.length) {
+      console.log(req.remainder);
       var matches = req.remainder.match(/^\/\d+\/\d+\/\d+\/(.*)$/);
       if (matches) {
-        req.remainder = matches[1];
+        console.log('MATCHES');
+        req.remainder = '/' + matches[1];
+      } else {
+        console.log('DOES NOT MATCH');
       }
     }
     superDispatch.call(this, req, callback);
@@ -66,6 +71,17 @@ blog.Blog = function(options, callback) {
 
   self.getDefaultTitle = function() {
     return 'My Article';
+  };
+
+  // Returns a "permalink" URL to the snippet, beginning with the
+  // slug of the specified page. See findBestPage for a good way to
+  // choose a page beneath which to link this snippet.
+  //
+  // It is commonplace to override this function. For instance,
+  // blog posts add the publication date to the URL.
+
+  self.permalink = function(snippet, page) {
+    return page.slug + '/' + moment(snippet.publishedAt).format('YYYY/MM/DD') + '/' + snippet.slug;
   };
 
   // Invoke callback on next tick so that the blog object
