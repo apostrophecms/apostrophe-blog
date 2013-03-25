@@ -57,13 +57,9 @@ blog.Blog = function(options, callback) {
 
   self.dispatch = function(req, callback) {
     if (req.remainder.length) {
-      console.log(req.remainder);
       var matches = req.remainder.match(/^\/\d+\/\d+\/\d+\/(.*)$/);
       if (matches) {
-        console.log('MATCHES');
         req.remainder = '/' + matches[1];
-      } else {
-        console.log('DOES NOT MATCH');
       }
     }
     superDispatch.call(this, req, callback);
