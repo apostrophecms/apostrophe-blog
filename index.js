@@ -34,7 +34,7 @@ blog.Blog = function(options, callback) {
     // Overridden separately so that one can have types that just
     // override the templates and don't mess with replacing
     // all of the javascript and CSS
-    webAssetDir: __dirname + '/public',
+    webAssetDir: __dirname,
     // The default would be aposBlogPostMenu, this is more natural
     menuName: 'aposBlogMenu'
   });
