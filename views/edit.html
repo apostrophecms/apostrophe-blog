@@ -1,30 +1,12 @@
-<div class="apos-modal apos-template apos-edit-blog-post">
-  <h3>Edit Article</h3>
-  <div class="apos-modal-body">
-    <form>
-      <fieldset>
-        <label>Title</label>
-        <input name="title" type="text" />
-      </fieldset>
-      <fieldset>
-        <label>Tags (comma-separated)</label>
-        <input name="tags" type="text" />
-      </fieldset>
+{% extends "new.html" %}
 
-      <fieldset>
-        <label>Slug</label>
-        <input name="slug" type="text" />
-      </fieldset>
+{% include "snippetMacros.html" %}
 
-      <fieldset class="apos-editor-fieldset">
-        <label>Body</label>
-        <div data-body-edit-view></div>
-      </fieldset>
-    </form>
-  </div>
-  <div class="apos-modal-footer">
-    <a href="#" data-action="save" class="apos-control apos-button apos-save">Save</a>
-    <a href="#" data-action="dismiss" class="apos-control apos-button apos-cancel">Cancel</a>
-    <a href="#" data-action="delete" class="apos-control apos-button apos-delete">Delete</a>
-  </div>
-</div>
+{% block class %}apos-edit-blog-post{% endblock %}
+
+{% block label %}Edit Blog Post{% endblock %}
+
+{% block slug %}
+  {{ snippetText('slug', 'Slug') }}
+{% endblock %}
+

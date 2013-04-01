@@ -80,9 +80,11 @@ blog.Blog = function(options, callback) {
     return page.slug + '/' + moment(snippet.publishedAt).format('YYYY/MM/DD') + '/' + snippet.slug;
   };
 
-  // Invoke callback on next tick so that the blog object
-  // is returned first and can be assigned to a variable for
-  // use in whatever our callback is invoking
-  process.nextTick(function() { return callback(null); });
+  if (callback) {
+    // Invoke callback on next tick so that the blog object
+    // is returned first and can be assigned to a variable for
+    // use in whatever our callback is invoking
+    process.nextTick(function() { return callback(null); });
+  }
 };
 
