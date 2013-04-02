@@ -1,4 +1,4 @@
-function AposBlog(optionsArg) {
+function AposBlogPosts(optionsArg) {
   var self = this;
   var options = {
     instance: 'blogPost'
@@ -11,7 +11,7 @@ function AposBlog(optionsArg) {
   // add handlers for editing the publication date and status, etc.
 }
 
-AposBlog.addWidgetType = function(options) {
+AposBlogPosts.addWidgetType = function(options) {
   if (!options) {
     options = {};
   }
