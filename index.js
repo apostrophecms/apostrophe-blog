@@ -80,6 +80,19 @@ blog.Blog = function(options, callback) {
     return page.slug + '/' + moment(snippet.publishedAt).format('YYYY/MM/DD') + '/' + snippet.slug;
   };
 
+  // Establish the default sort order for blogs
+  var superGet = self.get;
+  self.get = function(req, optionsArg, callback) {
+    var options = {};
+    // "Why copy the object like this?" If we don't, we're modifying the
+    // object that was passed to us, which could lead to side effects
+    extend(options, optionsArg || {}, true);
+    if (!options.sort) {
+      options.sort = { publishedAt: -1 };
+    }
+    return superGet.call(self, req, options, callback);
+  };
+
   if (callback) {
     // Invoke callback on next tick so that the blog object
     // is returned first and can be assigned to a variable for
