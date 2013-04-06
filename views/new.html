@@ -7,6 +7,8 @@
       {# Slugs become editable later, allow the edit template to add them here #}
       {% block slug %}{% endblock %}
       {{ snippetText('tags', 'Tags (comma-separated)') }}
+      {# The real work for these is in main.js, just get placeholders into the form #}
+      {{ snippetSingleton('thumbnail', 'Thumbnail') }}
       {{ snippetArea('body', 'Body') }}
     </form>
   </div>
