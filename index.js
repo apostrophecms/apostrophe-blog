@@ -31,6 +31,7 @@ blog.Blog = function(options, callback) {
     instance: 'blogPost',
     name: options.name || 'blog',
     label: options.name || 'Blog',
+    icon: options.icon || 'blog',
     // Overridden separately so that one can have types that just
     // override the templates and don't mess with replacing
     // all of the javascript and CSS
