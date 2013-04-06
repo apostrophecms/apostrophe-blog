@@ -14,17 +14,35 @@ Or just use tags to pull in articles.
 {% endblock %}
 
 {% block formBody %}
+
+<fieldset class="apos-fieldset apos-fieldset-radio">
   <label>By Tag</label><input type="radio" name="by" value="tag" />
-  <fieldset>
-    <label>Tags</label><input type="text" name="tags" />
-    <label>Articles Shown</label><input type="text" name="limit" />
-  </fieldset>
-  <label>By Title</label><input type="radio" name="by" value="id" />
-  <fieldset>
-    <label>Titles</label><input type="text" name="title" />
-    <ul data-ids>
-      <li data-id class="apos-template"><span data-title>Title</span> <a class="apos-remove">x</a></li>
-    </ul>
-  </fieldset>
+</fieldset>
+
+<fieldset class="apos-fieldset apos-fieldset-text">
+  <label>Tags</label>
+  <input type="text" name="tags" />
+</fieldset>
+
+<fieldset class="apos-fieldset apos-fieldset-text">
+  <label>Articles Shown</label>
+  <input type="text" name="limit" />
+</fieldset>
+
+<hr class="apos-hr" />
+
+<fieldset class="apos-fieldset apos-fieldset-radio">
+  <label>By Title</label>
+  <input type="radio" name="by" value="id" />
+</fieldset>
+
+<fieldset class="apos-fieldset apos-fieldset-text apos-fieldset-typeahead">
+  <label>Titles</label>
+  <input type="text" name="title" />
+  <ul data-ids>
+    <li data-id class="apos-template"><a class="apos-remove">x</a><span data-title>Title</span></li>
+  </ul>
+</fieldset>
+
 {% endblock %}
 
