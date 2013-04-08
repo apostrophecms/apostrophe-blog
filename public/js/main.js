@@ -9,6 +9,13 @@ function AposBlogPosts(optionsArg) {
   // but the default behavior of the AposSnippets javascript is
   // just about right for now. Later we'll want to catch events to
   // add handlers for editing the publication date and status, etc.
+
+  self.addingToManager = function($el, $snippet, snippet) {
+    $snippet.find('[data-published]').text(snippet.publishedAt);
+    if (snippet.tags !== null) {
+      $snippet.find('[data-tags]').text(snippet.tags);
+    }
+  };
 }
 
 AposBlogPosts.addWidgetType = function(options) {
@@ -23,3 +30,7 @@ AposBlogPosts.addWidgetType = function(options) {
   });
   AposSnippets.addWidgetType(options);
 };
+
+
+
+  // console.log()
