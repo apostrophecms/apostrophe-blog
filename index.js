@@ -70,6 +70,18 @@ blog.Blog = function(options, callback) {
     return 'My Article';
   };
 
+  // TODO this is not very i18n friendly
+  self.getAutocompleteTitle = function(snippet) {
+    return snippet.title + ' (' + moment(snippet.publishedAt).format('MM/DD') + ')';
+  };
+
+  // I bet you want some extra fields available along with the title to go with
+  // your custom getAutocompleteTitle. Override this to retrieve more stuff.
+  // We keep it to a minimum for performance.
+  self.getAutocompleteFields = function() {
+    return { title: 1, _id: 1, publishedAt: 1 };
+  };
+
   // Returns a "permalink" URL to the snippet, beginning with the
   // slug of the specified page. See findBestPage for a good way to
   // choose a page beneath which to link this snippet.
