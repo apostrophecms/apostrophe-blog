@@ -1,6 +1,8 @@
 {% include 'snippetMacros.html' %}
 <div class="apos-modal apos-template {% block class %}apos-new-blog-post{% endblock %}">
   <h3>{% block label %}New Article{% endblock %}</h3>
+  {% block topButtons %}
+  {% endblock %}
   <div class="apos-modal-body">
     <form>
       {{ snippetText('title', 'Title') }}
