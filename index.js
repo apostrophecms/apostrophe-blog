@@ -95,15 +95,54 @@ blog.Blog = function(options, callback) {
 
   // Establish the default sort order for blogs
   var superGet = self.get;
+
   self.get = function(req, optionsArg, callback) {
     var options = {};
+
     // "Why copy the object like this?" If we don't, we're modifying the
     // object that was passed to us, which could lead to side effects
     extend(options, optionsArg || {}, true);
+
+    // If options.publishedAt is 'any', we're in the admin interface and should be
+    // able to see articles whose publication date has not yet arrived. Otherwise,
+    // show only published stuff
+    if (options.publishedAt === 'any') {
+      delete options.publishedAt;
+    } else if (!options.publishedAt) {
+      options.publishedAt = { $lte: new Date() };
+    } else {
+      // Custom criteria were passed for publishedAt
+    }
+
     if (!options.sort) {
       options.sort = { publishedAt: -1 };
     }
     return superGet.call(self, req, options, callback);
+  };
+
+  function appendExtraFields(data, snippet, callback) {
+    snippet.publicationDate = self._apos.sanitizeDate(data.publicationDate, snippet.publicationDate);
+    snippet.publicationTime = self._apos.sanitizeTime(data.publicationTime, snippet.publicationTime);
+    if (snippet.publicationTime === null) {
+      snippet.publishedAt = new Date(snippet.publicationDate);
+    } else {
+      snippet.publishedAt = new Date(snippet.publicationDate + ' ' + snippet.publicationTime);
+    }
+    return callback(null);
+  }
+
+  self.beforeInsert = function(req, data, snippet, callback) {
+    appendExtraFields(data, snippet, callback);
+  };
+
+  self.beforeUpdate = function(req, data, snippet, callback) {
+    appendExtraFields(data, snippet, callback);
+  };
+
+  var superAddApiCriteria = self.addApiCriteria;
+  self.addApiCriteria = function(query, criteria) {
+    superAddApiCriteria.call(self, query, criteria);
+    criteria.publishedAt = 'any';
   };
 
   if (callback) {
