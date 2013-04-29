@@ -33,7 +33,7 @@ function AposBlogPosts(optionsArg) {
   };
 
   self.addingToManager = function($el, $snippet, snippet) {
-    $snippet.find('[data-published]').text(snippet.publishedAt);
+    $snippet.find('[data-date]').text(snippet.publicationDate);
     if (snippet.tags !== null) {
       $snippet.find('[data-tags]').text(snippet.tags);
     }
