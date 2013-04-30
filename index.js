@@ -145,6 +145,12 @@ blog.Blog = function(options, callback) {
     criteria.publishedAt = 'any';
   };
 
+  var superAddExtraAutocompleteCriteria = self.addExtraAutocompleteCriteria;
+  self.addExtraAutocompleteCriteria = function(req, criteria) {
+    superAddExtraAutocompleteCriteria.call(self, req, criteria);
+    criteria.publishedAt = 'any';
+  };
+
   if (callback) {
     // Invoke callback on next tick so that the blog object
     // is returned first and can be assigned to a variable for
