@@ -1,7 +1,8 @@
 function AposBlogPosts(optionsArg) {
   var self = this;
   var options = {
-    instance: 'blogPost'
+    instance: 'blogPost',
+    name: 'blog'
   };
   $.extend(options, optionsArg);
   AposSnippets.call(self, options);
