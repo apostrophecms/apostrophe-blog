@@ -1,4 +1,4 @@
-function AposBlogPosts(optionsArg) {
+function AposBlog(optionsArg) {
   var self = this;
   var options = {
     instance: 'blogPost',
@@ -49,7 +49,7 @@ function AposBlogPosts(optionsArg) {
   };
 }
 
-AposBlogPosts.addWidgetType = function(options) {
+AposBlog.addWidgetType = function(options) {
   if (!options) {
     options = {};
   }
