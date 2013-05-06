@@ -56,7 +56,7 @@ AposBlog.addWidgetType = function(options) {
   _.defaults(options, {
     name: 'blog',
     label: 'Blog Posts',
-    action: '/apos-blog-post',
+    action: '/apos-blog',
     defaultLimit: 5
   });
   AposSnippets.addWidgetType(options);
