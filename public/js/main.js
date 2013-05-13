@@ -24,7 +24,6 @@ function AposBlog(optionsArg) {
         changeMonth: true,
         numberOfMonths: 1,
         onClose: function( selectedDate ) {
-          console.log(selectedDate);
           $el.find('[name="publication-date"]').datepicker( "option", "minDate", selectedDate );
         }
       });
