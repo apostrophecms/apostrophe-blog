@@ -16,7 +16,7 @@ function AposBlog(optionsArg) {
 
   self.afterPopulatingEditor = function($el, snippet, callback) {
     $el.find('[name="publication-date"]').val(snippet.publicationDate);
-    $el.find('[name="publication-time"]').val(snippet.publicationTime);
+    $el.find('[name="publication-time"]').val(apos.formatTime(snippet.publicationTime));
 
     $(function() {
       $el.find('[name="publication-date"]').datepicker({
