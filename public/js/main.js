@@ -18,16 +18,7 @@ function AposBlog(optionsArg) {
     $el.find('[name="publication-date"]').val(snippet.publicationDate);
     $el.find('[name="publication-time"]').val(apos.formatTime(snippet.publicationTime));
 
-    $(function() {
-      $el.find('[name="publication-date"]').datepicker({
-        defaultDate: "+0w",
-        changeMonth: true,
-        numberOfMonths: 1,
-        onClose: function( selectedDate ) {
-          $el.find('[name="publication-date"]').datepicker( "option", "minDate", selectedDate );
-        }
-      });
-    });
+    apos.enhanceDate($el.findByName('publication-date'));
 
     callback();
   };
