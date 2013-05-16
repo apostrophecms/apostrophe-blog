@@ -1,5 +1,4 @@
 {% extends "pageLayout.html" %}
-
 {% include "blogMacros.html" %}
 
 {% block bodyClass %}{{ super() }} apos-blog-page{% endblock %}
@@ -21,6 +20,7 @@
 
   <div class="apos-blog-posts">
     {{ renderBlogPosts(items, page.url) }}
+    {{ renderPager(pager, page.url) }}
   </div>
 {% endblock %}
 
