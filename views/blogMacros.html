@@ -19,9 +19,11 @@
       <h6>{{ item.publishedAt | date("MMM DD, YYYY") }}</h6>
     </div>
     <div class="apos-blog-post-body">{{ aposArea({ area: item.areas.body }) }}</div>
-    <div class="apos-blog-tags">
-      File under: {{ item.tags|join(', ') }}
-  </div>
+    {% if item.tags %}
+      <div class="apos-blog-tags">
+        File under: {{ item.tags|join(', ') }}
+      </div>
+    {% endif %}
 {% endmacro %}
 
 {# ...or use renderBlogPostPreviews to show previews of all items on a page (date and title) #}
