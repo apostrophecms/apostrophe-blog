@@ -40,8 +40,27 @@
     </div>
   </div>
 
+  {# TODO: set up a here() macro like we have in DR to implement #}
+  {# combinations of filters once we have them #}
+
   <div class="full-width-column">
     {{ renderPager(pager, page.url) }}
   </div>
+
+  {# Just uncomment this script block to enable infinite scroll instead! #}
+
+  {#
+  <script type="text/javascript">
+    $(function() {
+      $('.apos-refreshable .apos-blog-posts').bottomless({
+        source: {{ page.url | json }}
+      });
+      // We don't need the pager if we can infinite scroll
+      // However we hide it with JavaScript so that
+      // Google still finds it otherwise we have serious SEO issues!
+      $('.apos-refreshable .apos-pager').hide();
+    });
+  </script>
+  #}
 
 {% endblock %}

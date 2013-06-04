@@ -1,4 +1,5 @@
 {% extends "baseWidgetEditor.html" %}
+{% include "formMacros.html" %}
 
 {% block widgetVars %}
   {% set widgetClass = 'apos-blog-widget-editor' %}
@@ -36,13 +37,7 @@ Or just use tags to pull in articles.
   <input type="radio" name="by" value="id" />
 </fieldset>
 
-<fieldset class="apos-fieldset apos-fieldset-text apos-fieldset-typeahead">
-  <label>Titles</label>
-  <input type="text" name="title" />
-  <ul data-ids>
-    <li data-id class="apos-template"><a class="apos-remove">x</a><span data-title>Title</span></li>
-  </ul>
-</fieldset>
+{{ formAutocompleteList('ids', 'Titles') }}
 
 {% endblock %}
 

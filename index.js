@@ -146,6 +146,36 @@ blog.Blog = function(options, callback) {
     criteria.publishedAt = 'any';
   };
 
+  self._apos.tasks['generate-blog-posts'] = function(callback) {
+    var randomWords = require('random-words');
+    var i;
+    var posts = [];
+    for (i = 0; (i < 100); i++) {
+      var title = randomWords({ min: 5, max: 10, join: ' ' });
+      var at = new Date();
+      posts.push({
+        type: 'blogPost',
+        title: title,
+        slug: self._apos.slugify(title),
+        areas: {
+          body: {
+            items: [
+              {
+                type: 'richText',
+                content: randomWords({ min: 50, max: 200, join: ' ' })
+              }
+            ]
+          }
+        },
+        publishedAt: at,
+        publicationDate: moment(at).format('YYYY-MM-DD'),
+        publicationTime: moment(at).format('HH:MM'),
+        published: true
+      });
+    }
+    self._apos.pages.insert(posts, callback);
+  };
+
   if (callback) {
     // Invoke callback on next tick so that the blog object
     // is returned first and can be assigned to a variable for
