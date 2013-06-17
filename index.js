@@ -91,8 +91,9 @@ blog.Blog = function(options, callback) {
   // Establish the default sort order for blogs
   var superGet = self.get;
 
-  self.get = function(req, optionsArg, callback) {
+  self.get = function(req, userCriteria, optionsArg, callback) {
     var options = {};
+    var filterCriteria = {};
 
     // "Why copy the object like this?" If we don't, we're modifying the
     // object that was passed to us, which could lead to side effects
@@ -102,17 +103,21 @@ blog.Blog = function(options, callback) {
     // able to see articles whose publication date has not yet arrived. Otherwise,
     // show only published stuff
     if (options.publishedAt === 'any') {
-      delete options.publishedAt;
-    } else if (!options.publishedAt) {
-      options.publishedAt = { $lte: new Date() };
+      // Do not add our usual criteria for publication date. Note
+      // that userCriteria may still examine publication date
     } else {
-      // Custom criteria were passed for publishedAt
+      filterCriteria.publishedAt = { $lte: new Date() };
     }
 
     if (!options.sort) {
       options.sort = { publishedAt: -1 };
     }
-    return superGet.call(self, req, options, callback);
+
+    // Use $and to build a query that preserves whatever the
+    // userCriteria may be trying to do while still enforcing
+    // our publication date criteria
+
+    return superGet.call(self, req, { $and: [ userCriteria, filterCriteria ] }, options, callback);
   };
 
   function appendExtraFields(data, snippet, callback) {
@@ -135,15 +140,15 @@ blog.Blog = function(options, callback) {
   };
 
   var superAddApiCriteria = self.addApiCriteria;
-  self.addApiCriteria = function(query, criteria) {
-    superAddApiCriteria.call(self, query, criteria);
-    criteria.publishedAt = 'any';
+  self.addApiCriteria = function(query, criteria, options) {
+    superAddApiCriteria.call(self, query, criteria, options);
+    options.publishedAt = 'any';
   };
 
   var superAddExtraAutocompleteCriteria = self.addExtraAutocompleteCriteria;
-  self.addExtraAutocompleteCriteria = function(req, criteria) {
-    superAddExtraAutocompleteCriteria.call(self, req, criteria);
-    criteria.publishedAt = 'any';
+  self.addExtraAutocompleteCriteria = function(req, criteria, options) {
+    superAddExtraAutocompleteCriteria.call(self, req, criteria, options);
+    options.publishedAt = 'any';
   };
 
   self._apos.tasks['generate-blog-posts'] = function(callback) {
@@ -157,6 +162,7 @@ blog.Blog = function(options, callback) {
         type: 'blogPost',
         title: title,
         slug: self._apos.slugify(title),
+        testData: true,
         areas: {
           body: {
             items: [
