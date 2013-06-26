@@ -10,7 +10,7 @@
       {% block slug %}{% endblock %}
       {{ snippetText('tags', 'Tags (comma-separated)') }}
       {# TODO macroize this as snippetBoolean #}
-      {{ snippetSelect('published', 'Published', [ { name: '0', label: 'No' }, { name: '1', label: 'Yes' }]) }}
+      {{ snippetBoolean('published', 'Published') }}
       {{ snippetText('publication-date', 'Publication Date') }}
       {{ snippetText('publication-time', 'Publication Time') }}
       {# The real work for these is in main.js, just get placeholders into the form #}
