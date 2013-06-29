@@ -84,8 +84,9 @@ blog.Blog = function(options, callback) {
   // It is commonplace to override this function. For instance,
   // blog posts add the publication date to the URL.
 
-  self.permalink = function(snippet, page) {
-    return page.slug + '/' + moment(snippet.publishedAt).format('YYYY/MM/DD') + '/' + snippet.slug;
+  self.permalink = function(req, snippet, page, callback) {
+    snippet.url = page.slug + '/' + moment(snippet.publishedAt).format('YYYY/MM/DD') + '/' + snippet.slug;
+    return callback(null);
   };
 
   // Establish the default sort order for blogs
