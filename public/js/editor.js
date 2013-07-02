@@ -24,7 +24,9 @@ function AposBlog(optionsArg) {
   };
 
   self.addingToManager = function($el, $snippet, snippet) {
-    $snippet.find('[data-date]').text(snippet.publicationDate);
+    if (snippet.published) {
+      $snippet.find('[data-date]').text(snippet.publicationDate);
+    }
     if (snippet.tags !== null) {
       $snippet.find('[data-tags]').text(snippet.tags);
     }
