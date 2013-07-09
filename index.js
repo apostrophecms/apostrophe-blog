@@ -52,13 +52,69 @@ blog.Blog = function(options, callback) {
   var superDispatch = self.dispatch;
 
   self.dispatch = function(req, callback) {
+    var matches;
     if (req.remainder.length) {
-      var matches = req.remainder.match(/^\/\d+\/\d+\/\d+\/(.*)$/);
+      // An article: /YYYY/MM/DD/slug-of-article
+      matches = req.remainder.match(/^\/\d+\/\d+\/\d+\/(.+)$/);
       if (matches) {
+        // Let the default dispatcher find the article. We don't really care
+        // if the date is correct
         req.remainder = '/' + matches[1];
+      } else {
+        // Spot a year and month in the URL to implement filtering by month
+        matches = req.remainder.match(/^\/(\d+)\/(\d+)$/);
+
+        // activeYear and activeMonth = we are filtering to that month.
+        // thisYear and thisMonth = now (as in today).
+
+        // TODO: consider whether blog and events should share more logic
+        // around this and if so whether to use a mixin module or shove it
+        // into the (dangerously big already) base class, the snippets module
+        // or possibly even have events subclass blog after all.
+
+        if (matches) {
+          // force to integer
+          req.extras.activeYear = matches[1];
+          req.extras.activeMonth = matches[2];
+          // set up the next and previous urls for our calendar
+          var nextYear = req.extras.activeYear;
+          // Note use of - 0 to force a number
+          var nextMonth = req.extras.activeMonth - 0 + 1;
+          if (nextMonth > 12) {
+            nextMonth = 1;
+            nextYear = req.extras.activeYear - 0 + 1;
+          }
+          nextMonth = pad(nextMonth, 2);
+          req.extras.nextYear = nextYear;
+          req.extras.nextMonth = nextMonth;
+
+          var prevYear = req.extras.activeYear;
+          var prevMonth = req.extras.activeMonth - 0 - 1;
+          if (prevMonth < 1) {
+            prevMonth = 12;
+            prevYear = req.extras.activeYear - 0 - 1;
+          }
+          prevMonth = pad(prevMonth, 2);
+          req.extras.prevYear = prevYear;
+          req.extras.prevMonth = prevMonth;
+          // Make sure the default dispatcher considers the job done
+          req.remainder = '';
+        }
       }
+    } else {
+      // Nothing extra in the URL
+      req.extras.defaultView = true;
+      // The current month and year, for switching to navigating by month
+      var now = moment(new Date());
+      req.extras.thisYear = now.format('YYYY');
+      req.extras.thisMonth = now.format('MM');
     }
-    superDispatch.call(this, req, callback);
+
+    return superDispatch.call(this, req, callback);
+
+    function pad(s, n) {
+      return self._apos.padInteger(s, n);
+    }
   };
 
   self.getDefaultTitle = function() {
@@ -146,6 +202,31 @@ blog.Blog = function(options, callback) {
     options.publishedAt = 'any';
   };
 
+  var superAddCriteria = self.addCriteria;
+
+  self.addCriteria = function(req, criteria, options) {
+    superAddCriteria.call(self, req, criteria, options);
+
+    // activeYear and activeMonth = we are filtering to that month.
+    // thisYear and thisMonth = now (as in today).
+
+    // TODO: consider whether blog and events should share more logic
+    // around this and if so whether to use a mixin module or shove it
+    // into the (dangerously big already) base class, the snippets module
+    // or possibly even have events subclass blog after all.
+
+    if (req.extras.activeYear) {
+      // force to integer
+      var year = req.extras.activeYear - 0;
+      // month is 0-11 because javascript is wacky because Unix is wacky
+      var month = req.extras.activeMonth - 1;
+      // this still works if the month is already 11, you can roll over
+      criteria.publishedAt = { $gte: new Date(year, month, 1), $lt: new Date(year, month + 1, 1) };
+      // When showing content by month we switch to ascending dates
+      options.sort = { publishedAt: 1 };
+    }
+  };
+
   var superAddExtraAutocompleteCriteria = self.addExtraAutocompleteCriteria;
   self.addExtraAutocompleteCriteria = function(req, criteria, options) {
     superAddExtraAutocompleteCriteria.call(self, req, criteria, options);
@@ -159,6 +240,9 @@ blog.Blog = function(options, callback) {
     for (i = 0; (i < 100); i++) {
       var title = randomWords({ min: 5, max: 10, join: ' ' });
       var at = new Date();
+      // Many past publication times and a few in the future
+      // 86400 = one day in seconds, 1000 = milliseconds to seconds
+      at.setTime(at.getTime() + (10 - 90 * Math.random()) * 86400 * 1000);
       posts.push({
         type: 'blogPost',
         title: title,
