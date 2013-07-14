@@ -243,7 +243,7 @@ blog.Blog = function(options, callback) {
       // Many past publication times and a few in the future
       // 86400 = one day in seconds, 1000 = milliseconds to seconds
       at.setTime(at.getTime() + (10 - 90 * Math.random()) * 86400 * 1000);
-      posts.push({
+      var post = {
         type: 'blogPost',
         title: title,
         slug: self._apos.slugify(title),
@@ -260,9 +260,12 @@ blog.Blog = function(options, callback) {
         },
         publishedAt: at,
         publicationDate: moment(at).format('YYYY-MM-DD'),
-        publicationTime: moment(at).format('HH:MM'),
-        published: true
-      });
+        publicationTime: moment(at).format('HH:MM')
+      };
+      if (Math.random() > 0.2) {
+        post.published = true;
+      }
+      posts.push(post);
     }
     self._apos.pages.insert(posts, callback);
   };
