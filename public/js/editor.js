@@ -1,3 +1,5 @@
+// JavaScript which enables editing of this module's content belongs here.
+
 function AposBlog(optionsArg) {
   var self = this;
   var options = {
