@@ -8,7 +8,7 @@
       {{ snippetText('title', 'Title') }}
       {# Slugs become editable later, allow the edit template to add them here #}
       {% block slug %}{% endblock %}
-      {{ snippetText('tags', 'Tags (comma-separated)') }}
+      {{ snippetTags('tags', 'Tags (comma-separated)') }}
       {# TODO macroize this as snippetBoolean #}
       {{ snippetBoolean('published', 'Published') }}
       {{ snippetText('publication-date', 'Publication Date') }}

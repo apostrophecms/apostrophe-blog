@@ -20,15 +20,8 @@ Or just use tags to pull in articles.
   <label>By Tag</label><input type="radio" name="by" value="tag" />
 </fieldset>
 
-<fieldset class="apos-fieldset apos-fieldset-text">
-  <label>Tags</label>
-  <input type="text" name="tags" />
-</fieldset>
-
-<fieldset class="apos-fieldset apos-fieldset-text">
-  <label>Articles Shown</label>
-  <input type="text" name="limit" />
-</fieldset>
+{{ formTags('tags', 'Tags') }}
+{{ formText('limit', 'Articles Shown') }}
 
 <hr class="apos-hr" />
 

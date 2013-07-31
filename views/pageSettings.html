@@ -1,10 +1,5 @@
+{% include 'formMacros.html' %}
 <div class="apos-template apos-page-settings-blog">
-<fieldset class="apos-fieldset apos-fieldset-text apos-fieldset-tags">
-  <label>Show Articles Tagged:</label>
-  <input name="typeSettings[tags]" />
-</fieldset>
-<fieldset class="apos-fieldset apos-fieldset-text apos-fieldset-tags">
-  <label>But Not Tagged:</label>
-  <input name="typeSettings[notTags]" />
-</fieldset>
+{{ formTags('tags', 'Show Articles Tagged:') }}
+{{ formTags('notTags', 'But Not Tagged:') }}
 </div>

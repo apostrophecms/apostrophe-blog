@@ -102,7 +102,7 @@
   <script type="text/javascript">
     $(function() {
       $('.apos-refreshable .apos-blog-posts').bottomless({
-        source: {{ page.url | json }}
+        url: {{ page.url | json }}
       });
       // We don't need the pager if we can infinite scroll
       // However we hide it with JavaScript so that
