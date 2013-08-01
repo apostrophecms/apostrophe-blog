@@ -200,6 +200,8 @@ blog.Blog = function(options, callback) {
   self.addApiCriteria = function(query, criteria, options) {
     superAddApiCriteria.call(self, query, criteria, options);
     options.publishedAt = 'any';
+    // Newest first is much better for management & selection purposes
+    options.sort = { publishedAt: -1 };
   };
 
   var superAddCriteria = self.addCriteria;
