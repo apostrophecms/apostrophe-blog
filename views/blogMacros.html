@@ -11,10 +11,14 @@
   {% endif %}
 {% endmacro %}
 
+{%- macro itemUrl(pageUrl, item) -%}
+  {{ pageUrl | build([ 'year', 'month', 'day', 'slug' ], { year: item.publishedAt | date('YYYY'), month: item.publishedAt | date('MM'), day: item.publishedAt | date('DD'), slug: item.slug }) }}
+{%- endmacro -%}
+
 {% macro renderBlogPost(item, pageUrl) %}
   <div class="apos-blog-post">
     <div class="apos-blog-post-heading">
-      <h4><a href="{{ pageUrl }}/{{ item.publishedAt | date('YYYY/MM/DD') }}/{{ item.slug }}">{{ item.title | e }}</a></h4>
+      <h4><a href="{{ itemUrl(pageUrl, item) }}">{{ item.title | e }}</a></h4>
       <div class="blog-title-divider"></div>
       <h6>{{ item.publishedAt | date("MMM DD, YYYY") }}</h6>
     </div>
@@ -42,11 +46,11 @@
   <div class="apos-blog-post-preview">
     <div class="apos-blog-post">
       <div class="apos-blog-date">
-       <h4><a href="{{ pageUrl }}/{{ item.publishedAt | date('YYYY/MM/DD') }}/{{ item.slug }}">{{ item.publishedAt | date("MMM") }}</a></h4>
-        <h3><a href="{{ pageUrl }}/{{ item.publishedAt | date('YYYY/MM/DD') }}/{{ item.slug }}">{{ item.publishedAt | date("DD") }}</a></h4>
+       <h4><a href="{{ itemUrl(pageUrl, item) }}">{{ item.publishedAt | date("MMM") }}</a></h4>
+        <h3><a href="{{ itemUrl(pageUrl, item) }}">{{ item.publishedAt | date("DD") }}</a></h4>
       </div>
       <div class="apos-blog-title">
-        <h4><a href="{{ pageUrl }}/{{ item.publishedAt | date('YYYY/MM/DD') }}/{{ item.slug }}">{{ item.title | e }}</a></h4>
+        <h4><a href="{{ itemUrl(pageUrl, item) }}">{{ item.title | e }}</a></h4>
       </div>
       {# TODO: add byline once the author field is worked out in A2 #}
     </div>
