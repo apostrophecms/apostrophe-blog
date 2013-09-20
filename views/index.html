@@ -75,6 +75,22 @@
       </div>
     {% endif %}
 
+    {% set filteredFeed = here({ 'feed': 'rss' }) %}
+    {% set fullFeed = page.url | build({ 'feed': 'rss' }) %}
+
+    <div class="column-element filter-links">
+
+      {# RSS auto discovery #}
+      {% block extraHead %}
+        <link rel="alternate" type="application/rss+xml" title="{{ page.title | e }}" href="{{ filteredFeed or fullFeed }}" />
+      {% endblock %}
+
+      {% if filteredFeed != fullFeed %}
+        <h4><a href="{{ filteredFeed }}"><img src="/apos-snippets/images/feed-icon-16x16.png" /> Filtered RSS Feed</a></h4>
+      {% endif %}
+      <h4><a href="{{ fullFeed }}"><img src="/apos-snippets/images/feed-icon-16x16.png" /> Full RSS Feed</a></h4>
+    </div>
+
     <div class="column-element apos-area-sidebar">
       {{ aposArea({
         slug: slug + ":sidebar",
