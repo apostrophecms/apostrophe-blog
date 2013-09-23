@@ -4,6 +4,23 @@
 
 {% block bodyClass %}{{ super() }} apos-blog-post-page{% endblock %}
 
+{# Article specific title tag, for Facebook, SEO, etc. #}
+{%- block title -%}
+  {{ siteTitle }} &ndash; {{ item.title | e }}
+{%- endblock -%}
+
+{# Facebook image, so it doesn't hoover up images from the dropdown menus #}
+{# Works only if you specify an absolute URL for uploadsUrl in data/local.js #}
+
+{% set firstImage = aposAreaFindFile({ area: item.areas.thumbnail, group: 'images'}) or
+  aposAreaFindFile({ area: item.areas.body, group: 'images' }) %}
+
+{% block extraHead %}
+  {% if firstImage %}
+    <meta property="og:image" content="{{ aposFilePath(firstImage) }}" />
+  {% endif %}
+{% endblock %}
+
 {% block extraBreadcrumbs %}
   <li><a href="{{ page.url }}">{{ page.title | e }}</a></li>
   <li>&nbsp;/&nbsp;{{ item.title | e }}</li>
