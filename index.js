@@ -235,42 +235,44 @@ blog.Blog = function(options, callback) {
     options.publishedAt = 'any';
   };
 
-  self._apos.tasks['generate-blog-posts'] = function(callback) {
-    var randomWords = require('random-words');
-    var i;
-    var posts = [];
-    for (i = 0; (i < 100); i++) {
-      var title = randomWords({ min: 5, max: 10, join: ' ' });
-      var at = new Date();
-      // Many past publication times and a few in the future
-      // 86400 = one day in seconds, 1000 = milliseconds to seconds
-      at.setTime(at.getTime() + (10 - 90 * Math.random()) * 86400 * 1000);
-      var post = {
-        type: 'blogPost',
-        title: title,
-        slug: self._apos.slugify(title),
-        testData: true,
-        areas: {
-          body: {
-            items: [
-              {
-                type: 'richText',
-                content: randomWords({ min: 50, max: 200, join: ' ' })
-              }
-            ]
-          }
-        },
-        publishedAt: at,
-        publicationDate: moment(at).format('YYYY-MM-DD'),
-        publicationTime: moment(at).format('HH:MM')
-      };
-      if (Math.random() > 0.2) {
-        post.published = true;
+  self._apos.on('tasks:register', function(taskGroups) {
+    taskGroups.apostrophe.generateBlogPosts = function(apos, argv, callback) {
+      var randomWords = require('random-words');
+      var i;
+      var posts = [];
+      for (i = 0; (i < 100); i++) {
+        var title = randomWords({ min: 5, max: 10, join: ' ' });
+        var at = new Date();
+        // Many past publication times and a few in the future
+        // 86400 = one day in seconds, 1000 = milliseconds to seconds
+        at.setTime(at.getTime() + (10 - 90 * Math.random()) * 86400 * 1000);
+        var post = {
+          type: 'blogPost',
+          title: title,
+          slug: self._apos.slugify(title),
+          testData: true,
+          areas: {
+            body: {
+              items: [
+                {
+                  type: 'richText',
+                  content: randomWords({ min: 50, max: 200, join: ' ' })
+                }
+              ]
+            }
+          },
+          publishedAt: at,
+          publicationDate: moment(at).format('YYYY-MM-DD'),
+          publicationTime: moment(at).format('HH:MM')
+        };
+        if (Math.random() > 0.2) {
+          post.published = true;
+        }
+        posts.push(post);
       }
-      posts.push(post);
-    }
-    self._apos.pages.insert(posts, callback);
-  };
+      self._apos.pages.insert(posts, callback);
+    };
+  });
 
   if (callback) {
     // Invoke callback on next tick so that the blog object
