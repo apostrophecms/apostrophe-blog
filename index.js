@@ -247,6 +247,7 @@ blog.Blog = function(options, callback) {
         // 86400 = one day in seconds, 1000 = milliseconds to seconds
         at.setTime(at.getTime() + (10 - 90 * Math.random()) * 86400 * 1000);
         var post = {
+          _id: self._apos.generateId(),
           type: 'blogPost',
           title: title,
           slug: self._apos.slugify(title),
