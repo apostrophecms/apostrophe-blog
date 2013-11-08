@@ -29,9 +29,6 @@ function AposBlog(optionsArg) {
     if (snippet.published) {
       $snippet.find('[data-date]').text(snippet.publicationDate);
     }
-    if (snippet.tags !== null) {
-      $snippet.find('[data-tags]').text(snippet.tags);
-    }
   };
 
   self.beforeInsert = function($el, data, callback) {
