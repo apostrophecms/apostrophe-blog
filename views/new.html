@@ -1,7 +1,9 @@
 {% include 'snippetMacros.html' %}
-<div class="apos-modal apos-template {% block class %}apos-new-blog-post{% endblock %}">
-  <h3>{% block label %}New Article{% endblock %}</h3>
+<div class="apos-modal apos-template {% block class %}{{ newClass }}{% endblock %}">
+  <h3>{% block label %}New {{ instanceLabel | e }}{% endblock %}</h3>
   {% block topButtons %}
+  {# Makes more sense in edit view #}
+  {# {{ snippetNewButtons() }} #}
   {% endblock %}
   <div class="apos-modal-body">
     <form>
@@ -9,13 +11,15 @@
       {# Slugs become editable later, allow the edit template to add them here #}
       {% block slug %}{% endblock %}
       {{ snippetTags('tags', 'Tags (comma-separated)') }}
-      {# TODO macroize this as snippetBoolean #}
+      {# It's rare to unpublish a snippet, but it's used heavily for derivatives like articles #}
       {{ snippetBoolean('published', 'Published') }}
       {{ snippetText('publication-date', 'Publication Date') }}
       {{ snippetText('publication-time', 'Publication Time') }}
-      {# The real work for these is in main.js, just get placeholders into the form #}
-      {{ snippetSingleton('thumbnail', 'Thumbnail') }}
-      {{ snippetArea('body', 'Body') }}
+
+      {# Calls the various snippet macros for us, for every field that is defined #}
+      {# in the schema. You can call them individually instead, or mix and match #}
+      {# using the 'from' and 'to' arguments to snippetAllFields #}
+      {{ snippetAllFields(fields) }}
     </form>
   </div>
   {% block buttons %}

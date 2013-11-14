@@ -30,7 +30,8 @@ blog.Blog = function(options, callback) {
   _.defaults(options, {
     instance: 'blogPost',
     name: options.name || 'blog',
-    label: options.name || 'Blog',
+    label: options.label || 'Articles',
+    instanceLabel: options.instanceLabel || 'Article',
     icon: options.icon || 'blog',
     // The default would be aposBlogPostMenu, this is more natural
     menuName: 'aposBlogMenu'
