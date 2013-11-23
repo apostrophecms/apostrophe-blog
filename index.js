@@ -37,6 +37,34 @@ blog.Blog = function(options, callback) {
     menuName: 'aposBlogMenu'
   });
 
+  options.addFields = [
+    {
+      // Add these new fields after the "published" field
+      after: 'published',
+
+      name: 'publicationDate',
+
+      // Support for old templates. Don't use this property in new work please.
+      legacy: 'publication-date',
+
+      label: 'Publication Date',
+      type: 'date'
+    },
+    {
+      name: 'publicationTime',
+
+      // Support for old templates. Don't use this property in new work please.
+      legacy: 'publication-time',
+
+      label: 'Publication Time',
+      type: 'time'
+    }
+  ].concat(options.addFields || []);
+
+  options.removeFields = [
+    'hideTitle'
+  ].concat(options.removeFields || []);
+
   options.modules = (options.modules || []).concat([ { dir: __dirname, name: 'blog' } ]);
 
   // Call the base class constructor. Don't pass the callback, we want to invoke it
@@ -118,10 +146,6 @@ blog.Blog = function(options, callback) {
     }
   };
 
-  self.getDefaultTitle = function() {
-    return 'My Article';
-  };
-
   // TODO this is not very i18n friendly
   self.getAutocompleteTitle = function(snippet) {
     return snippet.title + ' (' + moment(snippet.publishedAt).format('MM/DD') + ')';
@@ -176,25 +200,6 @@ blog.Blog = function(options, callback) {
     // our publication date criteria
 
     return superGet.call(self, req, { $and: [ userCriteria, filterCriteria ] }, options, callback);
-  };
-
-  function appendExtraFields(data, snippet, callback) {
-    snippet.publicationDate = self._apos.sanitizeDate(data.publicationDate, snippet.publicationDate);
-    snippet.publicationTime = self._apos.sanitizeTime(data.publicationTime, snippet.publicationTime);
-    if (snippet.publicationTime === null) {
-      snippet.publishedAt = new Date(snippet.publicationDate);
-    } else {
-      snippet.publishedAt = new Date(snippet.publicationDate + ' ' + snippet.publicationTime);
-    }
-    return callback(null);
-  }
-
-  self.beforeInsert = function(req, data, snippet, callback) {
-    appendExtraFields(data, snippet, callback);
-  };
-
-  self.beforeUpdate = function(req, data, snippet, callback) {
-    appendExtraFields(data, snippet, callback);
   };
 
   var superAddApiCriteria = self.addApiCriteria;
