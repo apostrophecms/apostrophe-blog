@@ -256,6 +256,7 @@ blog.Blog = function(options, callback) {
           _id: self._apos.generateId(),
           type: 'blogPost',
           title: title,
+          sortTitle: self._apos.sortify(title),
           slug: self._apos.slugify(title),
           testData: true,
           areas: {
