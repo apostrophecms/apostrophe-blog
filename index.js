@@ -146,6 +146,19 @@ blog.Blog = function(options, callback) {
     }
   };
 
+  // Denormalize the publication date and time
+  var superBeforeSave = self.beforeSave;
+  self.beforeSave = function(req, data, snippet, callback) {
+    if (snippet.publicationTime === null) {
+      // Make sure we specify midnight, if we leave off the time entirely we get
+      // midnight UTC, not midnight local time
+      snippet.publishedAt = new Date(snippet.publicationDate + ' 00:00:00');
+    } else {
+      snippet.publishedAt = new Date(snippet.publicationDate + ' ' + snippet.publicationTime);
+    }
+    return superBeforeSave(req, data, snippet, callback);
+  };
+
   // TODO this is not very i18n friendly
   self.getAutocompleteTitle = function(snippet) {
     return snippet.title + ' (' + moment(snippet.publishedAt).format('MM/DD') + ')';
