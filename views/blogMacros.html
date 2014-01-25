@@ -7,7 +7,7 @@
       {{ renderBlogPost(item, pageUrl) }}
     {% endfor %}
   {% else %}
-    <h4>There are no blog posts yet.</h4>
+    <h4>{{ __('There are no blog posts yet.') }}</h4>
   {% endif %}
 {% endmacro %}
 
@@ -25,7 +25,7 @@
     <div class="apos-blog-post-body">{{ aposArea({ area: item.areas.body }) }}</div>
     {% if item.tags %}
       <div class="apos-blog-tags">
-        File under: {{ item.tags|join(', ') }}
+        {{ __('File under') }}: {{ item.tags|join(', ') }}
       </div>
     {% endif %}
 {% endmacro %}
@@ -38,7 +38,7 @@
       {{ renderBlogPostPreview(item, pageUrl) }}
     {% endfor %}
   {% else %}
-    <h4>There are no blog posts yet.</h4>
+    <h4>{{ __('There are no blog posts yet.') }}</h4>
   {% endif %}
 {% endmacro %}
 
