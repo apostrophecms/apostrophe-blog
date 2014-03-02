@@ -20,17 +20,17 @@
 
     {# View by Month or View Recent #}
     {% if defaultView %}
-      <div class="filter-element view-by-month-button"><h4><a href="{{ here({ year: thisYear, month: thisMonth }) }}">View Articles by Month</a></h4></div>
+      <div class="filter-element view-by-month-button"><h4><a href="{{ here({ year: thisYear, month: thisMonth }) }}">{{ __('View Articles by Month') }}</a></h4></div>
     {% else %}
-      <div class="filter-element view-recent-button"><h4><a href="{{ here({ year: null, month: null }) }}">View Recent Articles</a></h4></div>
+      <div class="filter-element view-recent-button"><h4><a href="{{ here({ year: null, month: null }) }}">{{ __('View Recent Articles') }}</a></h4></div>
     {% endif %}
 
     {# the filter, which is only visible if there are tags present #}
     <div class="filter-element filter-select-container">
       {% if allTags.length %}
-          <label for="type-filter">Filter by </label>
+          <label for="type-filter">{{ __('Filter by') }} </label>
           <select id="snippets-tag-filter" name="type-filter">
-            <option value="{{ here({ tag: null }) }}">All</option>
+            <option value="{{ here({ tag: null }) }}">{{ __('All') }}</option>
             {%- for tag in allTags -%}
               {%- if tag.length -%}
                 <option {% if query.tag == tag %}selected{%endif %} value="{{ here({ tag: tag }) }}">{{ tag }}</option>
@@ -42,7 +42,7 @@
 
     {# Title of current view (shows month forward and backward controls in month view) #}
     {% if defaultView %}
-      <div class="filter-element active-view"><h4>Recent Articles</h4></div>
+      <div class="filter-element active-view"><h4>{{ __('Recent Articles') }}</h4></div>
     {% else %}
       <div class="filter-element current-month">
         <h4 class="month browse-by-month active">
@@ -62,8 +62,8 @@
 
         {% block subnav %}
           <div class="subnavigation">
-            <h4>Subpages</h4>
-            <p>Blog posts have tags, and that means you can create a blog subpage that only shows a certain set of tags. Try it out!</p>
+            <h4>{{ __('Subpages') }}</h4>
+            <p>{{ __('Blog posts have tags, and that means you can create a blog subpage that only shows a certain set of tags. Try it out!') }}</p>
             <ol class="children">
             {% for relative in page.children %}
               <li><a href="{{ relative.url }}">{{ relative.title | e }}</a></li>
@@ -86,9 +86,9 @@
       {% endblock %}
 
       {% if filteredFeed != fullFeed %}
-        <h4><a href="{{ filteredFeed }}"><img src="/apos-snippets/images/feed-icon-16x16.png" /> Filtered RSS Feed</a></h4>
+        <h4><a href="{{ filteredFeed }}"><img src="/apos-snippets/images/feed-icon-16x16.png" /> {{ __('Filtered RSS Feed') }}</a></h4>
       {% endif %}
-      <h4><a href="{{ fullFeed }}"><img src="/apos-snippets/images/feed-icon-16x16.png" /> Full RSS Feed</a></h4>
+      <h4><a href="{{ fullFeed }}"><img src="/apos-snippets/images/feed-icon-16x16.png" /> {{ __('Full RSS Feed') }}</a></h4>
     </div>
 
     <div class="column-element apos-area-sidebar">
