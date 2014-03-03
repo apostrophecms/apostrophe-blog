@@ -272,15 +272,14 @@ blog.Blog = function(options, callback) {
           sortTitle: self._apos.sortify(title),
           slug: self._apos.slugify(title),
           testData: true,
-          areas: {
-            body: {
-              items: [
-                {
-                  type: 'richText',
-                  content: randomWords({ min: 50, max: 200, join: ' ' })
-                }
-              ]
-            }
+          body: {
+            type: 'area',
+            items: [
+              {
+                type: 'richText',
+                content: randomWords({ min: 50, max: 200, join: ' ' })
+              }
+            ]
           },
           publishedAt: at,
           publicationDate: moment(at).format('YYYY-MM-DD'),

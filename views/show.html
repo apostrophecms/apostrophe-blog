@@ -12,8 +12,7 @@
 {# Facebook image, so it doesn't hoover up images from the dropdown menus #}
 {# Works only if you specify an absolute URL for uploadsUrl in data/local.js #}
 
-{% set firstImage = aposAreaFindFile({ area: item.areas.thumbnail, group: 'images'}) or
-  aposAreaFindFile({ area: item.areas.body, group: 'images' }) %}
+{% set firstImage = aposAreaImage(item, 'thumbnail') or aposAreaImage(item, 'body') %}
 
 {% block extraHead %}
   {% if firstImage %}
@@ -28,7 +27,7 @@
 
 {% block mainContent %}
   <div class="column apos-area-sidebar">
-    {{ aposArea({ slug: slug + ":sidebar", area: page.areas.sidebar, edit: edit }) }}
+    {{ aposArea(page, 'sidebar') }}
   </div>
 
   <div class="column-2 blog-posts">
