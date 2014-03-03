@@ -18,7 +18,7 @@
       <div class="blog-title-divider"></div>
       <h6>{{ item.publishedAt | date("MMM DD, YYYY") }}</h6>
     </div>
-    <div class="apos-blog-post-body">{{ aposArea({ area: item.areas.body }) }}</div>
+    <div class="apos-blog-post-body">{{ aposArea(item, 'body') }}</div>
     {% if item.tags %}
       <div class="apos-blog-tags">
         File under: {{ item.tags|join(', ') }}
