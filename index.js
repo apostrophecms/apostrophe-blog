@@ -225,7 +225,7 @@ blog.Blog = function(options, callback) {
       filterCriteria.publishedAt = { $lte: new Date() };
     }
 
-    if (!options.sort) {
+    if ((!options.sort) && (!options.search) && (!options.q)) {
       options.sort = { publishedAt: -1 };
     }
 
