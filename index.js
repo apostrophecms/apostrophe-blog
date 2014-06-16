@@ -65,26 +65,30 @@ blog.Blog = function(options, callback) {
     'hideTitle'
   ].concat(options.removeFields || []);
 
-  options.groupFields = options.groupFields ||
-    // We don't list the title field so it stays on top
-    [
-      {
-        name: 'content',
-        label: 'Content',
-        icon: 'content',
-        fields: [
-          'thumbnail', 'body'
-        ]
-      },
-      {
-        name: 'details',
-        label: 'Details',
-        icon: 'metadata',
-        fields: [
-          'slug', 'published', 'publicationDate', 'publicationTime', 'tags'
-        ]
-      }
-    ];
+  // If somebody REALLY doesn't want to group their fields,
+  // take the hint, otherwise supply a default behavior
+  if (options.groupFields !== false) {
+    options.groupFields = options.groupFields ||
+      // We don't list the title field so it stays on top
+      [
+        {
+          name: 'content',
+          label: 'Content',
+          icon: 'content',
+          fields: [
+            'thumbnail', 'body'
+          ]
+        },
+        {
+          name: 'details',
+          label: 'Details',
+          icon: 'metadata',
+          fields: [
+            'slug', 'published', 'publicationDate', 'publicationTime', 'tags'
+          ]
+        }
+      ];
+  }
 
   options.modules = (options.modules || []).concat([ { dir: __dirname, name: 'blog' } ]);
 
