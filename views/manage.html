@@ -1,33 +1,47 @@
+{% extends 'baseModal.html' %}
+{% include 'uiMacros.html' %}
 {% include 'snippetMacros.html' %}
-<div class="apos-modal apos-template {{ manageClass }}">
-  <h3>{% block action %}{{ __('Manage %s', label | e) }}{% endblock %}</h3>
-  <div class="apos-modal-body">
-    <a href="#" class="apos-control apos-button apos-new-button apos-new-snippet-button" {{ newButtonData }}>{{ __('New %s', instanceLabel | e) }}</a>
-    <div class="apos-modal-filters">
-      {{ snippetFilters() }}
-    </div>
-    <table data-items class="apos-manage-table">
-      <tr>
-        <th class="apos-manage-events-date">{{ __('Published') }}</th>
-        <th class="apos-manage-events-title">{{ __('Title') }}</th>
-        <th class="apos-manage-events-author">{{ __('Author') }}</th>
-        <th class="apos-manage-events-status">{{ __('Tags') }}</th>
-      </tr>
-      <tr class="apos-template" data-item>
-        <td>
-          <span data-date></span>
-        </td>
-        <td>
-          <span><a href="#" {{ editButtonData }} data-title>{{ __('Sample Title') }}</a></span>
-        </td>
-        <td></td>
-        <td><span data-tags></span></td>
-      </tr>
-    </table>
-    {# Container for pager, which gets rendered here by js #}
-    <div data-pager-box></div>
+
+{% block modalClass %}
+  {{manageClass}} apos-ui-modal-no-sidebar
+{% endblock%}
+
+{% block modalControls %}
+  {{ renderProgressBtn({dataAttrs: 'data-cancel', float: 'left', arrow: 'left', label: __('Done')}) }}
+  {{ renderProgressBtn({dataAttrs: newButtonData, float: 'right', arrow: 'right', color: 'base', label: __( 'New %s', __(instanceLabel) | e )}) }}
+{% endblock%}
+
+{% block modalFilters %}
+  <div class="apos-ui-modal-filters-inner">
+    {{ snippetFilters() }}
   </div>
-  <div class="apos-modal-footer">
-    <a href="#" data-action="dismiss" class="apos-control apos-button apos-cancel">{{ __('Done') }}</a>
-  </div>
-</div>
+  
+{% endblock %}
+
+{% block modalLabel %}
+  {{ __('Manage %s', __(pluralLabel) | e ) }}
+{% endblock %}
+
+{% block modalBody %}
+  <table data-items class="apos-manage-table">
+    <tr>
+      <th class="apos-manage-events-date">{{ __('Published') }}</th>
+      <th class="apos-manage-events-title">{{ __('Title') }}</th>
+      <th class="apos-manage-events-author">{{ __('Author') }}</th>
+      <th class="apos-manage-events-status">{{ __('Tags') }}</th>
+    </tr>
+    <tr class="apos-template" data-item>
+      <td>
+        <span data-date></span>
+      </td>
+      <td>
+        <span><a href="#" {{ editButtonData }} data-title>{{ __('Sample Title') }}</a></span>
+      </td>
+      <td></td>
+      <td><span data-tags></span></td>
+    </tr>
+  </table>
+
+  {# Container for pager, which gets rendered here by js #}
+  <div data-pager-box></div>
+{% endblock %}
