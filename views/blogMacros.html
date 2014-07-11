@@ -11,14 +11,19 @@
   {% endif %}
 {% endmacro %}
 
-{% macro renderBlogPost(item, pageUrl) %}
+{% macro renderBlogPost(item, pageUrl, options) %}
   <div class="apos-blog-post">
     <div class="apos-blog-post-heading">
-      <h4><a href="{{ item.url }}">{{ item.title | e }}</a></h4>
+      <h4>
+        <a href="{{ item.url }}">{{ item.title | e }}</a>
+        {% if options.edit and item._edit %}
+          <a class="apos-control apos-ui apos-button apos-edit-snippet-button" data-edit-{{ item.type | css }} data-slug="{{ item.slug }}" href="#"><i class="icon-pencil"></i> Edit</a>
+        {% endif %}
+      </h4>
       <div class="blog-title-divider"></div>
       <h6>{{ item.publishedAt | date("MMM DD, YYYY") }}</h6>
     </div>
-    <div class="apos-blog-post-body">{{ aposArea(item, 'body') }}</div>
+    <div class="apos-blog-post-body">{{ aposArea(item, 'body', { edit: false }) }}</div>
     {% if item.tags %}
       <div class="apos-blog-tags">
         {{ __('File under') }}: {{ item.tags|join(', ') }}
