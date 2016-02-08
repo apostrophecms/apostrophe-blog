@@ -184,9 +184,15 @@ blog.Blog = function(options, callback) {
     return superBeforeSave(req, data, snippet, callback);
   };
 
-  // TODO this is not very i18n friendly
+  // Don't find this i18n friendly? Just override this method at project level
   self.getAutocompleteTitle = function(snippet) {
-    return snippet.title + ' (' + moment(snippet.publishedAt).format('MM/DD') + ')';
+    var thisYear = moment().format('YYYY');
+    var thatYear = moment(snippet.publishedAt).format('YYYY');
+    if (thisYear !== thatYear) {
+      return snippet.title + ' (' + moment(snippet.publishedAt).format('MM/DD/YY') + ')';
+    } else {
+      return snippet.title + ' (' + moment(snippet.publishedAt).format('MM/DD') + ')';
+    }
   };
 
   // I bet you want some extra fields available along with the title to go with
