@@ -16,7 +16,7 @@ module.exports = {
   beforeConstruct: function(self, options) {
     var now = moment();
 
-    options.sort = { publishedAt: 1 };
+    options.sort = { publishedAt: -1 };
 
     options.addFields = [
       {
