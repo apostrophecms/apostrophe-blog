@@ -1,0 +1,9 @@
+{% extends data.outerLayout %}
+{% block title %}{{ data.piece.title }}{% endblock %}
+
+{% block main %}
+  <div class="apos-event-preview">
+    <h3 class="apos-event-title">{{ data.piece.title }}</h3>
+    <h5 class="apos-event-date">{{ data.piece.start | date('MMMM Do') }} at {{ data.piece.start | date('h:mma') }}</h5>
+  </div>
+{% endblock %}

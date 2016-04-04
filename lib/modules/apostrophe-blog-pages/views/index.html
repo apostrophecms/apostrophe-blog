@@ -1,0 +1,11 @@
+{% extends data.outerLayout %}
+{% block title %}{{ data.page.title }}{% endblock %}
+
+{% block main %}
+  {% for piece in data.pieces %}
+    <div class="apos-blog-post-preview">
+      <h6 class="apos-blog-post-date">Published On {{ piece.publishedAt | date('MMMM Do, YYYY') }}</h6>
+      <h4 class="apos-blog-post-title"><a href="{{ piece._url }}">{{ piece.title }}</a></h4>
+    </div>
+  {% endfor %}
+{% endblock %}

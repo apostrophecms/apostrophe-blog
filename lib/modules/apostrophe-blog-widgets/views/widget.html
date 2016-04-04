@@ -1,0 +1,8 @@
+{% for piece in data.widget._pieces %}
+  <h4>
+    {% if piece._url %}<a href="{{ piece._url }}">{% endif %}
+      {{ piece.title }}
+    {% if piece._url %}</a>{% endif %}
+  </h4>
+  <h5>{{ piece.start | date('MMM Do') }} at {{ piece.start | date('h:mma') }}</h5>
+{% endfor %}
