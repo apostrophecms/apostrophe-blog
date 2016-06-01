@@ -79,6 +79,12 @@ module.exports = {
       return cursor;
     };
 
+    // When editing we don't care if the blog post is in the future
+    var superFindForEditing = self.findForEditing;
+    self.findForEditing = function(req, criteria, projection) {
+      return superFindForEditing(req, criteria, projection).future(null);
+    };
+
     // limit the results of autocomplete for joins
     // so they only include 
     self.extendAutocompleteCursor = function(cursor) {
