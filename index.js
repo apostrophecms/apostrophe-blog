@@ -79,5 +79,12 @@ module.exports = {
     self.extendAutocompleteCursor = function(cursor) {
       return cursor.future(false);
     };
+
+    // When editing we don't care if the blog post is in the future
+    var superFindForEditing = self.findForEditing;
+    self.findForEditing = function(req, criteria, projection) {
+      return superFindForEditing(req, criteria, projection).future(null);
+    };
+
   }
 };
