@@ -71,16 +71,11 @@ module.exports = {
   },
 
   construct: function(self, options) {
-    var superFind = self.find;
 
-    self.find = function(req, criteria, projection) {
-      var cursor = superFind(req, criteria, projection);
-      require('./lib/cursor')(self, cursor);
-      return cursor;
-    };
+    self.apos.define('apostrophe-blog-cursor', require('./lib/cursor.js'));
 
     // limit the results of autocomplete for joins
-    // so they only include 
+    // so they only include past posts
     self.extendAutocompleteCursor = function(cursor) {
       return cursor.future(false);
     };
