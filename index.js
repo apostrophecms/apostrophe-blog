@@ -72,8 +72,6 @@ module.exports = {
 
   construct: function(self, options) {
 
-    self.apos.define('apostrophe-blog-cursor', require('./lib/cursor.js'));
-
     // limit the results of autocomplete for joins
     // so they only include past posts
     self.extendAutocompleteCursor = function(cursor) {
