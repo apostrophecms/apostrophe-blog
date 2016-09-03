@@ -4,15 +4,17 @@ This bundle provides a complete foundation for blogging with the [Apostrophe CMS
 
 The bundle consists of three Apostrophe modules (in a single npm module):
 
-`apostrophe-blog`
-`apostrophe-blog-pages`
-`apostrophe-blog-widgets`
+* `apostrophe-blog`
+* `apostrophe-blog-pages`
+* `apostrophe-blog-widgets`
 
 The `apostrophe-blog` module provides the ability to create and edit blog posts and manage their publication dates.
 
 The `apostrophe-blog-pages` module displays blog posts on a page. It extends the `apostrophe-pieces-pages` module. A blog page displays only blog posts whose publication date has arrived.
 
 The `apostrophe-blog-widgets` module provides an `apostrophe-blog` widget, which you can use to select blog posts to appear anywhere on your site. Posts do not appear until their publication date.
+
+These three modules extend `apostrophe-pieces`, `apostrophe-pieces-pages` and `apostrophe-pieces-widgets`, and you can extend them further as well.
 
 ## Example configuration
 
