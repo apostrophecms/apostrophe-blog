@@ -48,6 +48,16 @@ modules: {
 }
 ```
 
+## Contextual editing
+
+You can set the `contextual: true` option for the `apostrophe-blog` module if you prefer to allow the end user to edit the content of the article "in context" on the `show.html` page. This is generally the preferred way to go.
+
+You can also set `contextual: true` for individual schema fields like `body` so that they don't appear in the modal at all.
+
+When `contextual: true` is set for the module, the user is redirected to the "show page" for that blog post as soon as they click "save" so that they can edit further.
+
+In addition, the "context menu" (the "Page menu") is enhanced with blogging-related choices when on a blog index page or show page.
+
 ## Multiple blogs
 
 One way to create two or more blogs is to create separate blog pages on the site, and use the "with these tags" feature to display only posts with certain tags.
