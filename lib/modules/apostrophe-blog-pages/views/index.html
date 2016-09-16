@@ -8,4 +8,6 @@
       <h4 class="apos-blog-post-title"><a href="{{ piece._url }}">{{ piece.title }}</a></h4>
     </div>
   {% endfor %}
+  {% import 'apostrophe-pager:macros.html' as pager with context %}
+  {{ pager.render({ page: data.currentPage, total: data.totalPages }, data.url) }}
 {% endblock %}
