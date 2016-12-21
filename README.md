@@ -66,3 +66,8 @@ Another approach is to `extend` the modules, creating new modules and a complete
 
 The latter approach is often best as it requires less user training to avoid confusion. The former approach has its own advantages, notably that it is easier to aggregate content and have it appear in multiple places intentionally.
 
+## Filtering blog posts
+
+The index page includes filters for `day`, `month`, and `year`, meaning that parameters in query strings like `&year=2016` will automatically be passed to the mongo query that loads the pieces for your index page. You can refer to these filters in your template by using `data.piecesFilters.year`, etc.
+
+[Check out this tutorial to learn more.](http://apostrophecms.org/docs/tutorials/intermediate/cursors.html#creating-filter-u-i-with-code-apostrophe-pieces-pages-code)
