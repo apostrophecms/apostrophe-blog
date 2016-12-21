@@ -68,6 +68,6 @@ The latter approach is often best as it requires less user training to avoid con
 
 ## Filtering blog posts
 
-The index page automatically includes filters for `day`, `month`, and `year`. Simply refer to these filters using `data.piecesFilters.year` etc in your index page template.
+The index page includes filters for `day`, `month`, and `year`, meaning that parameters in query strings like `&year=2016` will automatically be passed to the mongo query that loads the pieces for your index page. You can refer to these filters in your template by using `data.piecesFilters.year`, etc.
 
 [Check out this tutorial to learn more.](http://apostrophecms.org/docs/tutorials/intermediate/cursors.html#creating-filter-u-i-with-code-apostrophe-pieces-pages-code)
