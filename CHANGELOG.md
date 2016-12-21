@@ -1,3 +1,9 @@
+### 2.1.0
+
+Added simple filters for year, month, and day. You can leverage these in your `apostrophe-blog-pages` modules by leveraging the new `piecesFilters` behavior introduced in apostrophe 2.9.0. Simply refer to the filters using `data.piecesFilters.year` etc in your index page template.
+
+[Check out this tutorial to learn more.](http://apostrophecms.org/docs/tutorials/intermediate/cursors.html#creating-filter-u-i-with-code-apostrophe-pieces-pages-code)
+
 ### 2.0.2
 
 Sample `index.html` for `apostrophe-blog-pages` now includes the pager.
