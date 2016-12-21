@@ -66,3 +66,8 @@ Another approach is to `extend` the modules, creating new modules and a complete
 
 The latter approach is often best as it requires less user training to avoid confusion. The former approach has its own advantages, notably that it is easier to aggregate content and have it appear in multiple places intentionally.
 
+## Filtering blog posts
+
+The index page automatically includes filters for `day`, `month`, and `year`. Simply refer to these filters using `data.piecesFilters.year` etc in your index page template.
+
+[Check out this tutorial to learn more.](http://apostrophecms.org/docs/tutorials/intermediate/cursors.html#creating-filter-u-i-with-code-apostrophe-pieces-pages-code)
