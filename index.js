@@ -91,6 +91,7 @@ module.exports = {
         var now = moment();
         instance.publishedAt = now.format('YYYY-MM-DD');
       }
+      return newInstance;
     };
 
   }
