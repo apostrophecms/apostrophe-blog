@@ -14,7 +14,6 @@ module.exports = {
   },
 
   beforeConstruct: function(self, options) {
-    var now = moment();
 
     options.sort = { publishedAt: -1 };
 
@@ -23,7 +22,6 @@ module.exports = {
         name: 'publishedAt',
         label: 'Publication Date',
         type: 'date',
-        def: now.format('YYYY-MM-DD'),
         required: true
       },
     ].concat(options.addFields || []);
@@ -82,6 +80,18 @@ module.exports = {
     var superFindForEditing = self.findForEditing;
     self.findForEditing = function(req, criteria, projection) {
       return superFindForEditing(req, criteria, projection).future(null);
+    };
+    
+    var superNewInstance = self.newInstance;
+    self.newInstance = function() {
+      var instance = superNewInstance();
+      // Correct handling of dynamic default. If you do this in the schema
+      // you wind up with the day the server launched
+      if (!instance.publishedAt) {
+        var now = moment();
+        instance.publishedAt = now.format('YYYY-MM-DD');
+      }
+      return instance;
     };
 
   }
