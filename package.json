@@ -1,6 +1,6 @@
 {
   "name": "apostrophe-blog",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Blogging for the Apostrophe content management system",
   "main": "index.js",
   "scripts": {
