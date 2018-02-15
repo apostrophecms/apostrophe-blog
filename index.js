@@ -7,7 +7,7 @@ module.exports = {
   alias: 'blog',
   label: 'Article',
   extend: 'apostrophe-pieces',
-  
+
   moogBundle: {
     modules: ['apostrophe-blog-pages', 'apostrophe-blog-widgets'],
     directory: 'lib/modules'
@@ -34,9 +34,9 @@ module.exports = {
     options.addColumns = [
       {
         name: 'publishedAt',
-        label: 'Publication Date', 
+        label: 'Publication Date',
       }
-    ]
+    ].concat(options.addColumns || []);
 
     options.addSorts = [
       {
@@ -81,7 +81,7 @@ module.exports = {
     self.findForEditing = function(req, criteria, projection) {
       return superFindForEditing(req, criteria, projection).future(null);
     };
-    
+
     var superNewInstance = self.newInstance;
     self.newInstance = function() {
       var instance = superNewInstance();
