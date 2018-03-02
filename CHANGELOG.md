@@ -1,3 +1,11 @@
+### 2.1.2
+
+Sample widget.html should refer to publishedAt, not start.
+
+### 2.1.1
+
+Corrected default publication date.
+
 ### 2.1.0
 
 Added simple filters for year, month, and day. You can leverage these in your `apostrophe-blog-pages` modules by leveraging the new `piecesFilters` behavior introduced in apostrophe 2.9.0. Simply refer to the filters using `data.piecesFilters.year` etc in your index page template.

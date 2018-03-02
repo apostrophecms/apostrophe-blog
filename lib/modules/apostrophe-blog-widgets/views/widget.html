@@ -4,5 +4,5 @@
       {{ piece.title }}
     {% if piece._url %}</a>{% endif %}
   </h4>
-  <h5>{{ piece.start | date('MMM Do') }} at {{ piece.start | date('h:mma') }}</h5>
+  <h5>Published {{ piece.publishedAt | date('MMM Do') }} at {{ piece.publishedAt | date('h:mma') }}</h5>
 {% endfor %}
