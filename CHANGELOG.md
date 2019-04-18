@@ -1,3 +1,7 @@
+### 2.1.3
+
+Updates the package URL and keywords.
+
 ### 2.1.2
 
 Sample widget.html should refer to publishedAt, not start.
