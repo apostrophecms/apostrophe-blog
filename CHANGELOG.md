@@ -1,3 +1,7 @@
+### 2.2.0
+
+Updates the version of Moment.js.
+
 ### 2.1.3
 
 Updates the package URL and keywords.
