@@ -28,7 +28,7 @@ module.exports = {
 
     options.arrangeFields = _.merge([
       { name: 'basic', label: 'Basics', fields: ['title', 'slug'] },
-      { name: 'meta', label: 'Meta', fields: ['tags','published'] }
+      { name: 'meta', label: 'Meta', fields: ['tags','published', 'publishedAt'] }
     ], options.arrangeFields || []);
 
     options.addColumns = [
