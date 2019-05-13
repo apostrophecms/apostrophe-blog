@@ -1,3 +1,7 @@
+### 2.2.1
+
+Arrange the `publishedAt` field, quashing spurious warnings. Thanks to Brad Wood.
+
 ### 2.2.0
 
 Updates the version of Moment.js.
