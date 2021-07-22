@@ -1,3 +1,7 @@
+### Unreleased
+
+Fixes a broken link in the README.
+
 ### 2.2.1
 
 Arrange the `publishedAt` field, quashing spurious warnings. Thanks to Brad Wood.
